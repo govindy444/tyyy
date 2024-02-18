@@ -26,7 +26,7 @@ class LetestMoviesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        CustomNetworkSDK.get("https://dummy.restapiexample.com/api/v1/employees",object :
+        CustomNetworkSDK.get("https://api.themoviedb.org/3/person/popular?api_key=909594533c98883408adef5d56143539",object :
             NetworkCallback {
             override fun onSuccess(response: String?) {
                 val gson = Gson()
