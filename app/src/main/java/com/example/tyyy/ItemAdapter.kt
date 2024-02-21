@@ -13,6 +13,10 @@ import com.bumptech.glide.Glide
 class ItemAdapter(private val items: List<MovieModel>) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
     private lateinit var context: Context
 
+    private var listener: OnItemClickListener? = null
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.movie_view_layout, parent, false)
         return ItemViewHolder(itemView)
@@ -23,8 +27,11 @@ class ItemAdapter(private val items: List<MovieModel>) : RecyclerView.Adapter<It
         holder.tv_movie_title.text = currentItem.title
         holder.tvVoteAverage.text = currentItem.description
         Glide.with(context)
-            .load("https://www.example.com/image.jpg")
+            .load(currentItem.imageMovie)
             .into(holder.iv_movie)
+        holder.itemView.setOnClickListener {
+            listener?.onItemClick(position)
+        }
     }
 
     override fun getItemCount(): Int {

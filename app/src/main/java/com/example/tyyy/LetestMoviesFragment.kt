@@ -1,10 +1,11 @@
 package com.example.tyyy
 
+import android.R
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.devrevtesst.CustomNetworkSDK
@@ -25,8 +26,10 @@ class LetestMoviesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view: View = inflater.inflate(R.layout.fragment_letest_movies, container, false)
+        recyclerView = view.findViewById(R.id.recyclerView)
 
-        CustomNetworkSDK.get("https://api.themoviedb.org/3/person/popular?api_key=909594533c98883408adef5d56143539",object :
+        CustomNetworkSDK.get("https://api.themoviedb.org/3/movie/latest?api_key=909594533c98883408adef5d56143539",object :
             NetworkCallback {
             override fun onSuccess(response: String?) {
                 val gson = Gson()
@@ -44,7 +47,7 @@ class LetestMoviesFragment : Fragment() {
 
         })
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_letest_movies, container, false)
+        return view
 
 
 
